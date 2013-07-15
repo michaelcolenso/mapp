@@ -1,0 +1,49 @@
+$iconSpritePath: "../images/glyphicons-halflings.png";
+$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
+
+@import 'sass-bootstrap/lib/bootstrap';
+
+.hero-unit {
+    margin: 50px auto 0 auto;
+    width: 300px;
+}
+
+rect {
+    fill: none;
+    pointer-events: all;
+}
+path {
+    fill:none;
+    stroke: grey;
+    stroke-width: .5px;
+    stroke-linejoin: round;
+
+    &.fortress {
+        stroke-width: 0.05px;
+        fill: blue;
+    }
+}
+
+#map {
+    width: 100%;
+    top: 10%;
+    position: fixed;
+}
+.active {
+    stroke: red;
+}
+.mesh {
+    stroke-linejoin: round;
+    stroke-width: .25px;
+    fill: orangered;
+}
+.page-header {
+    margin: -20px 0 0 30px;
+}
+.base-list {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 10%;
+}
+

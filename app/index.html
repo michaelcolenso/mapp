@@ -1,0 +1,124 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+        <script src="bower_components/d3/d3.min.js"></script>
+        <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+        <script src="http://d3js.org/topojson.v0.min.js"></script>
+    </head>
+    <body>
+    <div class="container">
+        <div id="map">
+            <div class="page-header"><h3>Military Installations, Ranges, and Training Areas in the US</h3></div>
+        </div>
+        <div class="base-list"></div>
+
+      </div>
+
+
+        <!-- build:js scripts/main.js -->
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="scripts/vendor/jquery.tipsy.js"></script>
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js(.tmp) scripts/coffee.js -->
+        <script src="scripts/hello.js"></script>
+        <!-- endbuild -->
+
+
+        <script>
+        var width = 1200,
+            height = 800,
+            active;
+
+        var projection = d3.geo.albersUsa();
+
+        var path = d3.geo.path()
+            .projection(projection);
+
+        var svg = d3.select("#map").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        svg.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .on("click", reset);
+
+        var g = svg.append("g");
+
+
+        d3.json("us.json", function(error, us) {
+          svg.append("path")
+              .datum(topojson.object(us, us.objects.land))
+              .attr("class", "land")
+              .attr("d", path);
+            })
+
+        var base = d3.json("dod_sites.json", function(error, army) {
+            g.selectAll("path")
+                .data(topojson.object(army, army.objects.fortress).geometries)
+              .enter().append("path")
+                .attr("d", path)
+                .attr("class", "fortress")
+                .attr("id", function (d){ return d.id; })
+                .append("svg:text", function(d){ return d.id });
+
+            g.selectAll("path")
+                .data(topojson.object(army, army.objects.fortress).geometries)
+                .append("svg:title")
+                .attr("dy", ".35em")
+                .text(function(d) { return d.id; });
+
+
+
+
+
+
+        var baselist = d3.select(".base-list");
+
+          baselist.selectAll("div")
+            .data(topojson.object(army, army.objects.fortress).geometries)
+            .enter().append("h4").text(function(d){ return d.id })
+            .html( function(d){ return d.id; })
+            .on("click", click)
+
+            });
+
+
+        function click(d) {
+
+          if (active === d) return reset();
+
+          g.selectAll(".active").classed("active", false);
+          d3.select(this).classed("active", active = d);
+
+          var b = path.bounds(d);
+          g.transition().duration(750).attr("transform",
+              "translate(" + projection.translate() + ")"
+              + "scale(" + .1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
+              + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
+        }
+
+        function reset() {
+          g.selectAll(".active").classed("active", active = false);
+          g.transition().duration(750).attr("transform", "");
+        }
+
+  </script>
+</body>
+</html>
