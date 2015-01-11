@@ -20,11 +20,17 @@
         <script src="http://d3js.org/topojson.v1.js"></script>
     </head>
     <body>
-    
+      <div class="container">
+        <div class="heading">
+          <h2><a href="http://catalog.data.gov/dataset/military-installations-ranges-and-training-areas" target="_blank">Military Installations, Ranges, and Training Areas</a></h2>
+        </div>
+        <div id="map"></div>
+      </div>
 
 
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/jquery.js"></script>
+        <script src="scripts/vendor/jquery.tipsy.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 
@@ -32,6 +38,8 @@
 
         <script>
         
-  </script>
+        $('.base').tipsy({title: 'id'});
+        
+        </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-var width = 960,
-    height = 500,
+var width = window.innerWidth,
+    height = window.innerHeight,
     active = d3.select(null);
 
 var projection = d3.geo.albersUsa()
@@ -15,10 +15,16 @@ var zoom = d3.behavior.zoom()
 var path = d3.geo.path()
     .projection(projection);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height)
     .on("click", stopped, true);
+    
+var div = d3.select("#map")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("background", "rgba(0,0,0,0.6)")
+      .style("opacity", 0);
 
 svg.append("rect")
     .attr("class", "background")
@@ -50,12 +56,23 @@ d3.json("us1.json", function(error, us) {
       .enter().append("path")
         .attr("d", path)
         .attr("class", "base")
+        .attr("id", function (d){ return d.id; })	
+        .on("mouseover", function(d) {
+          var basename = d.id;
+          div.transition().duration(200).style("opacity", .7);
+          div.html( "<h4>" + basename + "</h4>").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
+        })
+        .on("mouseout", function(d) {
+          div.transition().duration(200).style("opacity", 0);
+          div.style("left", "-9999px")
+        })
         .on("click", clicked);
-    
-});
+		   
+  });
 
 
 });
+
 
 function clicked(d) {
   if (active.node() === this) return reset();
@@ -94,3 +111,4 @@ function zoomed() {
 function stopped() {
   if (d3.event.defaultPrevented) d3.event.stopPropagation();
 }
+
