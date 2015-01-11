@@ -6,7 +6,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 body {
   margin: 0;
   font-size: 62.5%;
-  background: radial-gradient(ellipse at center, #955251 0, #321b1b 80%, #110909 100%);
+  background: radial-gradient(ellipse at center, #ff006a 0, black 80%, #110909 100%);
 }
 
 .heading {
@@ -60,7 +60,7 @@ body {
 }
 
 .tooltip {
+  font-family: monospace;
   color: #fff;
   padding: 2%;
-  border-radius: 10%;
 }

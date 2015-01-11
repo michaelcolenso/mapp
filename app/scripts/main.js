@@ -59,7 +59,7 @@ d3.json("us1.json", function(error, us) {
         .attr("id", function (d){ return d.id; })	
         .on("mouseover", function(d) {
           var basename = d.id;
-          div.transition().duration(200).style("opacity", .7);
+          div.transition().duration(200).style("opacity", .9);
           div.html( "<h4>" + basename + "</h4>").style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY) + "px");
         })
         .on("mouseout", function(d) {
