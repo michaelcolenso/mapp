@@ -1,5 +1,5 @@
 var width = window.innerWidth,
-    height = window.innerHeight,
+    height = 600,
     active = d3.select(null);
 
 var projection = d3.geo.albersUsa()

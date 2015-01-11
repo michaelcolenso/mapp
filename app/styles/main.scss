@@ -3,9 +3,11 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 @import 'sass-bootstrap/lib/bootstrap';
 
+html, body {
+  height: 100%;
+}
 body {
   margin: 0;
-  font-size: 62.5%;
   background: radial-gradient(ellipse at center, #ff006a 0, black 80%, #110909 100%);
 }
 
@@ -20,6 +22,11 @@ body {
     a {
       color: #fff;
     }
+  }
+  
+  p {
+    color: #fff;
+    text-align: center;
   }
 }
 
@@ -42,13 +49,15 @@ body {
   stroke-linejoin: miter;
   
   &:hover {
-    fill: red;
+    fill: blue;
+    stroke: blue;
   }
 }
 
 
 .base.active {
-  fill: red;
+  fill: blue;
+  stroke: blue;
   stroke-width: 0.5px;
 }
 
@@ -63,4 +72,28 @@ body {
   font-family: monospace;
   color: #fff;
   padding: 2%;
+}
+
+
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -100px;
+  /* Pad bottom by footer height */
+  padding: 0 0 100px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  text-align: center;
+  color: #fff;
+  height: 100px;
+  background-color: #000;
+  
+  .credit {
+    padding: 20px;
+  }
 }

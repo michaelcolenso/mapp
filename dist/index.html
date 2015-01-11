@@ -10,107 +10,30 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="styles/c0e71e70.main.css">
-        <link rel="stylesheet" href="styles/c0e71e70.main.css">
-        <script src="scripts/vendor/d41d8cd9.modernizr.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="styles/65dd532f.main.css">
+        <link rel="stylesheet" href="styles/65dd532f.main.css">
+        <script src="scripts/vendor/d7100892.modernizr.js"></script>
+        <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
         <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
-        <script src="http://d3js.org/topojson.v0.min.js"></script>
+        <script src="http://d3js.org/topojson.v1.js"></script>
     </head>
     <body>
-    <div class="container">
-        <div id="map">
-            <div class="page-header"><h3>Military Installations, Ranges, and Training Areas in the US</h3></div>
+      <div class="container-fluid">
+        <div class="heading">
+          <h2><a href="http://catalog.data.gov/dataset/military-installations-ranges-and-training-areas" target="_blank">Military Installations, Ranges, and Training Areas</a></h2>
         </div>
-        <div class="base-list"></div>
-
+        <div id="map"></div>
       </div>
 
 
-        <script src="scripts/9d779f70.main.js"></script>
+        <script src="scripts/e8fade66.main.js"></script>
 
-        <script src="scripts/3431b5a9.coffee.js"></script>
 
 
         <script>
-        var width = 1200,
-            height = 800,
-            active;
-
-        var projection = d3.geo.albersUsa();
-
-        var path = d3.geo.path()
-            .projection(projection);
-
-        var svg = d3.select("#map").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-        svg.append("rect")
-            .attr("width", width)
-            .attr("height", height)
-            .on("click", reset);
-
-        var g = svg.append("g");
-
-
-        d3.json("us.json", function(error, us) {
-          svg.append("path")
-              .datum(topojson.object(us, us.objects.land))
-              .attr("class", "land")
-              .attr("d", path);
-            })
-
-        var base = d3.json("dod_sites.json", function(error, army) {
-            g.selectAll("path")
-                .data(topojson.object(army, army.objects.fortress).geometries)
-              .enter().append("path")
-                .attr("d", path)
-                .attr("class", "fortress")
-                .attr("id", function (d){ return d.id; })
-                .append("svg:text", function(d){ return d.id });
-
-            g.selectAll("path")
-                .data(topojson.object(army, army.objects.fortress).geometries)
-                .append("svg:title")
-                .attr("dy", ".35em")
-                .text(function(d) { return d.id; });
-
-
-
-
-
-
-        var baselist = d3.select(".base-list");
-
-          baselist.selectAll("div")
-            .data(topojson.object(army, army.objects.fortress).geometries)
-            .enter().append("h4").text(function(d){ return d.id })
-            .html( function(d){ return d.id; })
-            .on("click", click)
-
-            });
-
-
-        function click(d) {
-
-          if (active === d) return reset();
-
-          g.selectAll(".active").classed("active", false);
-          d3.select(this).classed("active", active = d);
-
-          var b = path.bounds(d);
-          g.transition().duration(750).attr("transform",
-              "translate(" + projection.translate() + ")"
-              + "scale(" + .1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height) + ")"
-              + "translate(" + -(b[1][0] + b[0][0]) / 2 + "," + -(b[1][1] + b[0][1]) / 2 + ")");
-        }
-
-        function reset() {
-          g.selectAll(".active").classed("active", active = false);
-          g.transition().duration(750).attr("transform", "");
-        }
-
-  </script>
+        
+        $('.base').tipsy({title: 'id'});
+        
+        </script>
 </body>
 </html>

@@ -3,43 +3,51 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- build:js scripts/vendor/modernizr.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
-        <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
-        <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
-        <script src="http://d3js.org/topojson.v1.js"></script>
-    </head>
-    <body>
-      <div class="container-fluid">
-        <div class="heading">
-          <h2><a href="http://catalog.data.gov/dataset/military-installations-ranges-and-training-areas" target="_blank">Military Installations, Ranges, and Training Areas</a></h2>
-        </div>
-        <div id="map"></div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+  <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+  <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.js"></script>
+</head>
+<body>
+  <div id="wrap">
+    <div class="container-fluid">
+      <div class="heading">
+        <h2><a href="http://catalog.data.gov/dataset/military-installations-ranges-and-training-areas" target="_blank">Military Installations, Ranges, and Training Areas in the United States</a></h2>
+        <p>Click on a base to zoom in. Click and drag to pan the map, and double click to zoom the view.</p>
       </div>
-
-
-        <!-- build:js scripts/main.js -->
-        <script src="bower_components/jquery/jquery.js"></script>
-        <script src="scripts/vendor/jquery.tipsy.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-
-
-
-        <script>
-        
-        $('.base').tipsy({title: 'id'});
-        
-        </script>
-</body>
-</html>
+      <div id="map"></div>
+      <div id="footer">
+        <div class="container">
+          <p class="credit"><a href="http://michael.colenso.org" target="_blank">Michael Colenso</a> made this. See the code <a href="http://github.com/michaelcolenso/mapp" target="_blank">here.</a></p>
+        </div>
+      </div>
+      </div
+    </div>
+    
+    
+    <!-- build:js scripts/main.js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="scripts/vendor/jquery.tipsy.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    
+    
+    
+    <script>
+    
+    $('.base').tipsy({title: 'id'});
+    
+    </script>
+  </body>
+  </html>
